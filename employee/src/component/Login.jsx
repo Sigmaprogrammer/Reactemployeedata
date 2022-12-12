@@ -8,37 +8,49 @@ import { useState } from "react";
 import axiox from "axios";
 
 const Login = () => {
-
+    // useEffect(()=>{
+    //      if(!localStorage.getItem('login')){
+    //       navigate("/login");
+    //      }
+    // },[])
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const login = (e) => {
         e.preventDefault();
-        axiox
-          .post("http://localhost:5000/api/auth/login", {
+        axiox.post("http://localhost:5000/api/auth/login", {
             email,
             password,
           })
-          .then((response) => {
-            console.log("response", response);
-            localStorage.setItem(
-              "login",
-              JSON.stringify({
-                userLogin: true,
-                token: response.data.access_token,
-              })
-            );
-            setError("");
-            setEmail("");
-            setPassword("");
-            navigate("/home");
+          // .then((response) => {
+          //   console.log("response", response);
+          //   localStorage.setItem(
+          //     "login",
+          //     JSON.stringify({
+          //       userLogin: true,
+          //       token: response.data.access_token,
+          //     })
+          //   );
+
+          //   navigate("/")
+          //   setError("");
+          //   setEmail("");
+          //   setPassword("");
+          // })
+
+          .then(result =>{
+            console.log(result.data)
+            localStorage.setItem('token', result.data.token);
+            navigate('/')
           })
+          
           .catch((error) => setError(error.response.data.message));
       };
   return (
 
-    <div style={{backgroundImage:`url(${image})`,backgroundRepeat:"no-repeat center fixed",width:"100%",height:"700px",backgroundSize:"cover"}}>
+    <div style={{backgroundImage:`url(${image})`,backgroundRepeat:"no-repeat center fixed",width:"100%",height:"710px",backgroundSize:"cover"}}>
 
       <br/>
         <h1 style={{fontSize:"40px",fontFamily:"Josefin Sans, sans-serif",fontWeight:"bold"}}>Login</h1>

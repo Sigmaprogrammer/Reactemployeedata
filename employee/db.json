@@ -9,13 +9,6 @@
       "phone": "7010914129"
     },
     {
-      "name": "Katusha",
-      "username": "Abbie",
-      "email": "anunnerleyk@mozilla.org",
-      "phoneno": "288-280-1718",
-      "id": 21
-    },
-    {
       "name": "Melesa",
       "username": "Gweneth",
       "email": "gwymerl@bloglines.com",
@@ -1264,16 +1257,10 @@
     {
       "name": "manoj",
       "username": "manoj.moorthy",
-      "email": "manojkro788@gmail.com",
-      "phone": "7010914129",
-      "id": 200
-    },
-    {
-      "name": "T. Rajendar ",
-      "username": "manojkro758@gmail.com",
-      "email": "manojkro788@gmail.com",
-      "phone": "7010914129",
-      "id": 201
+      "email": "manojkro758@gmail.com",
+      "phoneno": "7010914124",
+      "id": 200,
+      "phone": "701"
     }
   ]
 }

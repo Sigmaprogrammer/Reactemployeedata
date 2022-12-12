@@ -2,15 +2,24 @@ import React from 'react'
 import { useEffect, useState, useMemo } from "react";
 import './DataTable.css'
 import image from '../../assets/home2.jpg';
-import { useNavigate,Link } from "react-router-dom";
+import NavBar from '../NavBar';
 import { TableHeader, Pagination} from "./Action";
-
+import { useNavigate} from "react-router-dom";
 const DataTable = () => {
+
+    const navigate = useNavigate();
+    useEffect(()=>{
+             if(!localStorage.getItem('token')){
+              navigate("/login");
+             }
+        },[])
+   
+
+
     const [comments, setComments] = useState([]);
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [sorting, setSorting] = useState({ field: "", order: "" });
-    
     const ITEMS_PER_PAGE = 12;
 
     const headers = [
@@ -62,64 +71,57 @@ const DataTable = () => {
     }, [comments, currentPage, sorting]);
 
 
+
+
+
+
+
+
+
   return (
+  
     <>
-          <div className="row w-100" style={{backgroundImage:`url(${image})`,backgroundRepeat:"no-repeat center fixed",width:"100%",height:"700px",backgroundSize:"cover"}}>
 
-          <nav className='navbar'>
-          <div className='nav_icon'>
-            <i className='fa fa-bars'> </i>
-            </div>
 
-            <div className='navbar__left'>
-                   <a>   <Link to="/home" style={{ textDecoration:"none",color:"white"}} className="hv">Home</Link></a>
-                   <a>   <Link to="/all" style={{ textDecoration:"none",color:"white"}}>Employeedata</Link></a>
-                   <a>   <Link to="/add" style={{ textDecoration:"none",color:"white"}}>Add Employee</Link></a>
-            </div>
+       <div className="row w-100" style={{backgroundImage:`url(${image})`,backgroundRepeat:"no-repeat center fixed",width:"100%",height:"700px",backgroundSize:"cover"}}>
 
-            <div className='navbar__right'>
-               <a>
-                <i className='fa fa-power-off'> <Link to="/" style={{ textDecoration:"none",color:"white"}}>Logout</Link></i>
-            </a>
-  </div>
+       <NavBar/>
+ <div className="col mb-3 col-12 text-center">
 
-    </nav>
-    <div className="col mb-3 col-12 text-center">
+     <table className="table table-striped">
+         <TableHeader
+             headers={headers}
+             onSorting={(field, order) =>
+                 setSorting({ field, order })
+             }
+             
+         />
+         <tbody>
+             {commentsData.map(comment => (
+                 <tr>
+                     <th scope="row" key={comment.id}>
+                         {comment.id}
+                     </th>
+                     <td>{comment.name}</td>
+                     <td>{comment.email}</td>
+                     <td>{comment.phoneno}</td>
+                 </tr>
+             ))}
+         </tbody>
+     </table>
 
-        <table className="table table-striped">
-            <TableHeader
-                headers={headers}
-                onSorting={(field, order) =>
-                    setSorting({ field, order })
-                }
-                
-            />
-            <tbody>
-                {commentsData.map(comment => (
-                    <tr>
-                        <th scope="row" key={comment.id}>
-                            {comment.id}
-                        </th>
-                        <td>{comment.name}</td>
-                        <td>{comment.email}</td>
-                        <td>{comment.phoneno}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-
-        <div className="row">
-       
-       <div className="col-md-6" style={{marginLeft:"30%",marginTop:"2%"}}>
-           <Pagination 
-               total={totalItems}
-               itemsPerPage={ITEMS_PER_PAGE}
-               currentPage={currentPage}
-               onPageChange={page => setCurrentPage(page)}
-           />
-       </div>
-   </div>
+     <div className="row">
+    
+    <div className="col-md-6" style={{marginLeft:"30%",marginTop:"2%"}}>
+        <Pagination 
+            total={totalItems}
+            itemsPerPage={ITEMS_PER_PAGE}
+            currentPage={currentPage}
+            onPageChange={page => setCurrentPage(page)}
+        />
     </div>
+</div>
+ </div>
 </div>
     </>
   )

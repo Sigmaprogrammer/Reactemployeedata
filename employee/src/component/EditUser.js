@@ -8,7 +8,7 @@ const initialValue = {
     name: '',
     username: '',
     email: '',
-    phone: ''
+    phoneno: ''
 }
 
 const Container = styled(FormGroup)`
@@ -21,7 +21,7 @@ const Container = styled(FormGroup)`
 
 const EditUser = () => {
     const [user, setUser] = useState(initialValue);
-    const { name, username, email, phone } = user;
+    const { name, username, email, phoneno } = user;
     const { id } = useParams();
     
     let navigate = useNavigate();
@@ -62,7 +62,7 @@ const EditUser = () => {
             </FormControl>
             <FormControl>
                 <InputLabel htmlFor="my-input">Phone</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name='phone' value={phone} id="my-input" aria-describedby="my-helper-text" />
+                <Input onChange={(e) => onValueChange(e)} name='phoneno' value={phoneno} id="my-input" aria-describedby="my-helper-text" />
             </FormControl>
             <FormControl>
                 <Button variant="contained" color="primary" onClick={() => editUserDetails()}>Edit User</Button>

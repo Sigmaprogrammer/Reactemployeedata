@@ -1,14 +1,17 @@
-import { useState } from 'react';
 import { FormGroup, FormControl, InputLabel, Input, Button, styled, Typography } from '@mui/material';
 import { addUser } from '../service/api';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import image from '../assets/home2.jpg'
+import NavBar from './NavBar';
+
+
 
 const initialValue = {
     name: '',
     username: '',
     email: '',
-    phone: ''
+    phoneno: ''
 }
 
 const Container = styled(FormGroup)`
@@ -18,9 +21,21 @@ const Container = styled(FormGroup)`
         margin-top: 20px;
 `;
 
+
+
+
 const AddUser = () => {
+
+
+   
+useEffect(()=>{
+    if(!localStorage.getItem('token')){
+     navigate("/login");
+    }
+},[])
+
     const [user, setUser] = useState(initialValue);
-    const { name, username, email, phone } = user;
+    const { name, username, email, phoneno } = user;
     let navigate = useNavigate();
 
     const onValueChange = (e) => {
@@ -34,24 +49,7 @@ const AddUser = () => {
 
     return (
         <div style={{backgroundImage:`url(${image})`,backgroundRepeat:"no-repeat center fixed",width:"100%",height:"700px",backgroundSize:"cover"}}>
-        <nav className='navbar'>
-        <div className='nav_icon'>
-          <i className='fa fa-bars'> </i>
-          </div>
-
-          <div className='navbar__left'>
-                 <a>   <Link to="/home" style={{ textDecoration:"none",color:"white"}} className="hv">Home</Link></a>
-                 <a>   <Link to="/all" style={{ textDecoration:"none",color:"white"}}>Employeedata</Link></a>
-                 <a>   <Link to="/add" style={{ textDecoration:"none",color:"white"}}>Add Employee</Link></a>
-          </div>
-
-          <div className='navbar__right'>
-             <a>
-              <i className='fa fa-power-off'> <Link to="/" style={{ textDecoration:"none",color:"white"}}>Logout</Link></i>
-          </a>
-</div>
-
-  </nav>
+  <NavBar/>
         <Container>
             <Typography variant="h4" style={{fontWeight:"bold"}}>Add User</Typography>
             <FormControl >
@@ -68,10 +66,10 @@ const AddUser = () => {
             </FormControl>
             <FormControl>
                 <InputLabel htmlFor="my-input">Phone</InputLabel>
-                <Input onChange={(e) => onValueChange(e)} name='phone' value={phone} id="my-input" />
+                <Input onChange={(e) => onValueChange(e)} name='phoneno' value={phoneno} id="my-input" />
             </FormControl>
             <FormControl>
-                <Button variant="contained" color="primary" onClick={() => addUserDetails()}>Add User</Button>
+                <Button  variant="contained" style={{backgroundColor:"black",borderRadius:"25px",marginTop:"20px",width:"400px",marginLeft:"200px"}} onClick={() => addUserDetails()}>Add User</Button>
             </FormControl>
         </Container>
         </div>

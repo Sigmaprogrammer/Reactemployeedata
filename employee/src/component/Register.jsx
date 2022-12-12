@@ -80,7 +80,7 @@ Register </font>   */}
     </Box>
     <h3 style={{textAlign:"center"}}>
      If already....&nbsp;&nbsp;Register{" "}
-     <Link style={{color:"white"}} to="/">Login</Link>
+     <Link style={{color:"white"}} to="/login">Login</Link>
      </h3>
     </div>
   )
